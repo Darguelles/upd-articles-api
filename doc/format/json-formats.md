@@ -1,6 +1,6 @@
-#JSON formats for objects used in this API
+# JSON formats for objects used in this API
 
-###Article
+### Article
 
 | Field | Type | Description |
 |---------|--------------|----------|
@@ -12,7 +12,7 @@
 | authors | Author[] | Author list. Each one has name and genre info. |
 | keywords | String[] | Keywords for specific search. Recommend to store lowercase keywords. |
 
-#####JSON Representation
+##### JSON Representation
 
 ````
 {
