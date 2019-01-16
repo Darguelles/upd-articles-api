@@ -13,6 +13,36 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
+
+findbugs {
+    ignoreFailures = false
+    toolVersion = "3.0.1"
+    sourceSets=[sourceSets.main]
+    reportsDir = file("$project.buildDir/reports/findbugs")
+    effort = "max"
+}
+
+tasks.withType(FindBugs) {
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
+}
+
+checkstyle {
+    toolVersion '7.8.1'
+}
+
+checkstyleMain {
+    source ='src/main/java'
+    ignoreFailures = true
+}
+checkstyleTest {
+    source ='src/test/java'
+    ignoreFailures = true
+}
 
 group = 'com.updaytest'
 version = '0.0.1-SNAPSHOT'
@@ -25,7 +55,6 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
-    //compileOnly 'com.hazelcast:hazelcast'
-    //compileOnly 'com.hazelcast:hazelcast-spring'
+    annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

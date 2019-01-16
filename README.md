@@ -1,11 +1,11 @@
 # Upday Articles Store API
 
-Welcome to the Upday articles API. This project allows you to create, store and update your created articles and perform custom search based on author's name, date creation or some predefined keyword.
+Welcome to the Upday articles API. This project allows you to create, store, delete and update your created articles and perform custom search based on author's name, date creation or some predefined keyword.
 
 
 ## Api Overview
 
-This API is based on RESTFUL and returns results in JSON format. Response objects will always have an HTTP status code indicating the operation status. The different json formats returned by this Api can be founded [here](/doc/format/json-formats.md).
+This API is based on RESTFUL and returns results in JSON format. Response objects will always have an HTTP status code indicating the operation status. The different json object formats used by this Api can be founded [here](/doc/format/json-formats.md).
 If you need more technical detail about how this api is developed, don't hesitate to visit the `doc/arch` folder in the application root and read the architecture design records.
 
 
@@ -27,6 +27,15 @@ This API returns 3 types of responses:
 - Single objects for creation requests.
 - Headers-only for updating requests or errors.
 - Lists for search requests.
+
+
+## Deploy
+
+This application can be deployed running the following commands:
+
+- Using the gradle plugin: `gradle bootRun`
+- Using the generated artifact: `java -jar target/upd-articles-api-0.0.1-SNAPSHOT.jar`
+- Using Docker: Execute the integrated .sh file -> `sh ./docker-deploy.sh`
 
 ## Commonly asked questions
 
