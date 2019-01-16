@@ -41,3 +41,7 @@ This API returns 3 types of responses:
 **Q:** The stored data persists even after restart the server?
 
 **A:** Currently this api store data on memory level, so all data will be loose if you stop/restart the server.
+
+**Q:** Can i search articles by more than one keyword?
+
+**A:** Currently the API only supports search operations just by one keyword at time.
