@@ -1,5 +1,6 @@
 package com.updaytest.service;
 
+import com.updaytest.exception.ArticleProcessingException;
 import com.updaytest.exception.NoExistingArticleException;
 import com.updaytest.model.Article;
 import com.updaytest.repo.ArticleRepository;
@@ -9,7 +10,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.updaytest.mock.ArticleMock.*;
@@ -34,7 +34,7 @@ public class ArticleServiceTest {
     }
 
     @Test
-    public void shouldSaveNewArticleAndReturnGeneratedId() {
+    public void shouldSaveNewArticleAndReturnGeneratedId() throws ArticleProcessingException {
         Article articleToSave = mock();
         Article savedArticle = mockSaved();
         when(repository.save(articleToSave)).thenReturn(savedArticle);
@@ -45,7 +45,7 @@ public class ArticleServiceTest {
     }
 
     @Test
-    public void shouldUpdateAnExistingArticle() throws NoExistingArticleException {
+    public void shouldUpdateAnExistingArticle() throws NoExistingArticleException, ArticleProcessingException {
         Article savedArticle = mockSaved();
         Article modifiedArticle = savedArticle;
         modifiedArticle.setDescription(NEW_ARTICLE_DESCRIPTION);
@@ -60,7 +60,7 @@ public class ArticleServiceTest {
     }
 
     @Test(expected = NoExistingArticleException.class)
-    public void shouldThrowNoExistingArticleExceptionWhenArticleDoesNotExists() throws NoExistingArticleException {
+    public void shouldThrowNoExistingArticleExceptionWhenArticleDoesNotExists() throws NoExistingArticleException, ArticleProcessingException {
         Article noExistingArticle = mock();
         when(repository.findById(DEFAULT_ID)).thenReturn(null);
 
@@ -89,7 +89,7 @@ public class ArticleServiceTest {
 
 
     @Test
-    public void shouldRetrieveArticlesOfASingleAuthor() {
+    public void shouldRetrieveArticlesOfASingleAuthor() throws NoExistingArticleException {
         when(repository.findByKeyword(EMPTY_PARAM)).thenReturn(mockList());
 
         List<Article> articlesByAuthor = service.searchByKeywordAndAuthorName(EMPTY_PARAM, "Erikson");
@@ -98,9 +98,7 @@ public class ArticleServiceTest {
     }
 
     @Test
-    public void shouldRetrieveAnEmptyListIfKeywordAndAuthorAreEmpty() {
-        when(repository.findByKeyword(EMPTY_PARAM)).thenReturn(new ArrayList<>());
-
+    public void shouldRetrieveAnEmptyListIfKeywordAndAuthorAreEmpty() throws NoExistingArticleException {
         List<Article> articles = service.searchByKeywordAndAuthorName(EMPTY_PARAM, EMPTY_PARAM);
 
         assertThat(articles.size(), is(0));

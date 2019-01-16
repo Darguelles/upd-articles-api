@@ -4,7 +4,6 @@ import com.updaytest.model.Article;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +34,7 @@ public class ArticleRepository {
 
     public List<Article> findByKeyword(String keyword) {
         if (keyword.equals("")) {
-            return new ArrayList<>();
+            return repository.values().parallelStream().collect(toList());
         }
         List<Article> articles = repository.values().parallelStream()
                 .filter(article -> article.getKeywords().contains(keyword))
