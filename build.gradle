@@ -19,7 +19,7 @@ apply plugin: 'findbugs'
 findbugs {
     ignoreFailures = false
     toolVersion = "3.0.1"
-    sourceSets=[sourceSets.main]
+    sourceSets = [sourceSets.main]
     reportsDir = file("$project.buildDir/reports/findbugs")
     effort = "max"
 }
@@ -36,11 +36,11 @@ checkstyle {
 }
 
 checkstyleMain {
-    source ='src/main/java'
+    source = 'src/main/java'
     ignoreFailures = true
 }
 checkstyleTest {
-    source ='src/test/java'
+    source = 'src/test/java'
     ignoreFailures = true
 }
 
@@ -52,9 +52,30 @@ repositories {
     mavenCentral()
 }
 
+sourceSets {
+    intTest {
+        java.srcDir file('src/intTest/java')
+        resources.srcDir file('src/intTest/resources')
+    }
+}
+
+task intTest(type: Test) {
+    description 'It runs the integration tests.'
+    testClassesDirs = sourceSets.intTest.output
+    classpath = sourceSets.intTest.runtimeClasspath
+}
+
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    compile 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile "io.rest-assured:rest-assured:3.0.0"
+
+    intTestImplementation sourceSets.main.output
+    intTestImplementation configurations.testCompile
+    intTestImplementation sourceSets.test.output
+    intTestRuntime configurations.testRuntime
 }
