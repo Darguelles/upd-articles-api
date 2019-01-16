@@ -25,5 +25,7 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
+    //compileOnly 'com.hazelcast:hazelcast'
+    //compileOnly 'com.hazelcast:hazelcast-spring'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
