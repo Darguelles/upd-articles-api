@@ -37,6 +37,23 @@ This application can be deployed running the following commands:
 - Using the generated artifact: `java -jar target/upd-articles-api-0.0.1-SNAPSHOT.jar`
 - Using Docker: Execute the integrated .sh file -> `sh ./docker-deploy.sh`
 
+
+## Execute integration tests
+
+- Using the gradle wrapper `./gradlew intTest`
+
+## Code smell and Reports
+
+You can find all the detected warning / errors of the code smell scan performed by Findbugs and Checkstyle in the following directory:
+
+
+`./build/reports/`
+
+Reports are generated in HTML format to better readability, keep in mind that this reports will be generated / updated each time you perform the build task.
+
+Note: If you are performing a build using docker, you wont be able to see those reports unless you enter to the WORKDIR route and search for the reports in the container.
+
+
 ## Commonly asked questions
 
 **Q:** I'm getting a Bad Requests status each time i want to perform a search between two dates. What is happening?
