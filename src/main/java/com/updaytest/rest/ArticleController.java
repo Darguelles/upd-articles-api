@@ -44,6 +44,12 @@ public class ArticleController {
         return new ResponseEntity<>(updated, prepareHeader(updated.getId()), OK);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Article> delete(@PathVariable Long id) throws NoExistingArticleException {
+        service.delete(id);
+        return ResponseEntity.ok().body(null);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Article> findArticle(@PathVariable Long id) throws NoExistingArticleException {
         return ResponseEntity.ok(service.getById(id));

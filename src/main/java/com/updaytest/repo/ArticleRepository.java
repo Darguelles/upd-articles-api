@@ -29,6 +29,10 @@ public class ArticleRepository {
         return article;
     }
 
+    public void delete(Long id){
+        repository.remove(id);
+    }
+
     public Article findById(Long id) {
         return repository.getOrDefault(id, null);
     }
