@@ -14,7 +14,8 @@ import static java.util.stream.Collectors.toList;
 public class ArticleRepository {
 
     private Map<Long, Article> repository = new HashMap<>();
-    private static long counter;
+
+    private long counter;
 
     public Article save(Article article) {
         counter++;
