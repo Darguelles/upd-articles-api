@@ -31,6 +31,15 @@ public class ArticleService {
         throw new ArticleProcessingException();
     }
 
+    public void delete(Long id) throws NoExistingArticleException {
+        Optional<Article> toDelete = ofNullable(articleRepository.findById(id));
+        if(toDelete.isPresent()){
+            articleRepository.delete(id);
+            return;
+        }
+        throw new NoExistingArticleException();
+    }
+
     public Article update(Article article) throws NoExistingArticleException, ArticleProcessingException {
         if (getById(article.getId()) != null) {
             Optional<Article> updated = ofNullable(articleRepository.update(article));
