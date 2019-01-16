@@ -8,7 +8,7 @@
 | header | String | Article header, minimal length is 1 |
 | description | String | Short article description, minimal length is 1 |
 | text | String | Article main content, minimal length is 1 |
-| publishDate | LocalDate | Creation date. Accepted format is DD-MM-YYYY |
+| publishDate | String | Creation date. Accepted format is DD-MM-YYYY |
 | authors | Author[] | Author list. Each one has name and genre info. |
 | keywords | String[] | Keywords for specific search. Recommend to store lowercase keywords. |
 
